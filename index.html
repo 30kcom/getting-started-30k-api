@@ -1,0 +1,76 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting started with 30K API</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <header>
+      <div class="top-bar">
+        <div>
+          <div class="top-bar-left">
+            <ul class="menu">
+              <li class="menu-text">30K Milefy API &mdash; Sample client app</li>
+            </ul>
+          </div>
+          <div class="top-bar-right">
+            <ul class="menu">
+              <li class="menu-text">Check also:</li>
+              <li>
+                <a href="http://demo.30k.com" target="_blank" title="See working integration and inspect API requests">API demo</a>
+              </li>
+              <li>
+                <a href="http://sandbox.30k.com" target="_blank" title="Explore API running custom calculation requests">API sandbox</a>
+              </li>
+              <li>
+                <a href="http://www.30k.com/docs/milefy/2.8/" target="_blank" title="Read latest Milefy API documentation">API documentation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <div id="main">
+      
+      <form name="searchform" id="form">
+        
+        <div class="row">
+          <div class="columns medium-6">
+            
+            <h1>Search for a flight</h1>
+            <p>Select one of available sample searches.</p>
+            
+            <label for="sample-searches">Sample searches</label>
+            
+            <select id="sample-searches" name="search" disabled="disabled">
+              <option value="">Loading&hellip;</option>
+            </select>
+            
+            <button type="submit" class="button round" disabled="disabled" id="submit">Search</button>
+            
+          </div>
+        </div>
+        
+      </form>
+      
+      <div id="results-wrapper" class="row">
+        <div class="columns medium-8">
+          <div id="results">
+            
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

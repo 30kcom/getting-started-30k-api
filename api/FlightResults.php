@@ -1,29 +1,80 @@
 <?php 
 
+// Milefy API Client class to get frequesnt flyer information
 require('MilefyApiClient.php');
 
+/*
+    
+    Generates flight search results HTML from flight search data
+    received from APIs.
+    
+*/
 class FlightResults{
     
+    /* PUBLIC =================================================================*/
+    
+    /*
+        Entry point
+        
+        @param $response - object containing base flight search result 
+        information such as itinerary, date, flight numbers etc.
+        
+    */
     public function __construct($response){
         
         $this->_helper = new Helper();
+        
+        // appends frequent flyer information to flight search results data
         $this->_response = $this->_appendFrequentFlyerInfo($response);
         
     }
     
+    /*
+        Returns HTML containing flight search results
+    */
+    public function toHtml(){
+        
+        ob_start();
+        
+        // include flight search result template
+        require('../../partials/results.php');
+        
+        $html = ob_get_contents();
+        ob_end_clean();
+        
+        return $html;
+        
+    }
+    
+    /* PROTECTED ==============================================================*/
+    
+    /*
+        Loads frequent flyer information from Milefy API
+        and appends it to flight search results info.
+    */
     protected function _appendFrequentFlyerInfo($response){
         
+        // validates flight search results
         if(!is_array($response['flights']) || count($response['flights']) <= 0) return $response;
         
+        // creates Milefy API client
         $milefyApiClient = new MilefyApiClient($response['flights']);
+        
+        // fetches array of flights containing frequent flyer info 
         $milefyFlights = $milefyApiClient->getFlights();
         
         if(!$milefyFlights) return $response;
         
+        // for every flight append frequent flyer info if exists
         foreach($response['flights'] as &$flight){
             
+            // find flight with frequent flyer info
             $milefyFlight = $this->_helper->find($milefyFlights, $flight['flightId'], 'flightId');
+            
+            // no frequent flyer info?
             if(!$milefyFlight) continue;
+            
+            // append frequent flyer info to the flight
             $flight['frequentFlyer'] = $milefyFlight;
             
         }
@@ -32,16 +83,9 @@ class FlightResults{
         
     }
     
-    public function toHtml(){
-        
-        ob_start();
-        require('../../partials/results.php');
-        $html = ob_get_contents();
-        ob_end_clean();
-        return $html;
-        
-    }
-    
+    /*
+        Formats flight total price
+    */
     protected function _getPrice($flight){
         
         if(!isset($flight['price']) || !is_array($flight['price']) 
@@ -51,6 +95,9 @@ class FlightResults{
         
     }
     
+    /*
+        Formats flight id
+    */
     protected function _getFlightId($flight){
         
         if(!isset($flight['flightId']) || !is_string($flight['flightId'])) return;
@@ -59,12 +106,17 @@ class FlightResults{
         
     }
     
+    /*
+        Returns list of merketing airlines for particular flight leg
+    */
     protected function _getAirlines($leg){
         
         if(!isset($leg['segments']) || !is_array($leg['segments']) || count($leg['segments']) <= 0) return;
         
+        // list with unique airline codes
         $airlines = [];
         
+        // for each seegment in flight leg
         foreach($leg['segments'] as $segment){
             
             if(is_string($segment['marketingAirlineCode']) && !in_array($segment['marketingAirlineCode'], $airlines)){
@@ -77,6 +129,7 @@ class FlightResults{
         
         $names = [];
         
+        // change airline codes into names
         foreach($airlines as $code){
             
             $airline = $this->_helper->find($this->_response['airlines'], $code, 'airlineCode');
@@ -88,6 +141,9 @@ class FlightResults{
         
     }
     
+    /*
+        Returns formatted time of arrival and departure
+    */
     protected function _getTime($leg, $isDeparture){
         
         if(!$leg || !is_array($leg['segments']) || count($leg['segments']) <= 0) return;
@@ -101,6 +157,9 @@ class FlightResults{
         
     }
     
+    /*
+        Returns departure and arrival airport for particular flight leg
+    */
     protected function _getAirport($leg, $isDeparture){
         
         if(!$leg || !is_array($leg['segments']) || count($leg['segments']) <= 0) return;
@@ -114,6 +173,9 @@ class FlightResults{
         
     }
     
+    /*
+        Returns formatted duration of particular flight leg
+    */
     protected function _getDuration($leg){
         
         if(!isset($leg['legDuration']) || !is_numeric($leg['legDuration'])) return;
@@ -133,6 +195,9 @@ class FlightResults{
         
     }
     
+    /*
+        Returns formatted number of stops in particular flight leg
+    */
     protected function _getStops($leg){
         
         $result = self::NONSTOP;
@@ -152,8 +217,11 @@ class FlightResults{
     }
     
     protected $_helper = null;
+    
+    // response containing flight search results
     protected $_response = null;
     
+    // texts
     const NONSTOP = 'Nonstop';
     const ONE_STOP = '1 stop';
     const MULTIPLE_STOPS = '%d stops';

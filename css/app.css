@@ -70,3 +70,7 @@
     color: #00e5e5;
     font-weight: bold;
 }
+
+.error{
+    color: red;
+}

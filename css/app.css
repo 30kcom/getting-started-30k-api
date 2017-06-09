@@ -30,9 +30,18 @@
     font-weight: bold;
 }
 
+.flight-price{
+    padding-right: 1rem;
+}
+
+.flight-price:not(:last-child){
+    border-right: 1px solid #ddd;
+}
+
 .leg-airlines,
 .leg-destination,
-.leg-duration{
+.leg-duration,
+.flight-price{
     margin-right: 1rem;
 }
 
@@ -51,4 +60,13 @@
 
 .leg-airlines em:not(:last-child)::after{
     content: ", ";
+}
+
+.flight-freq-flyer{
+    color: #666;
+}
+
+.flight-miles{
+    color: #00e5e5;
+    font-weight: bold;
 }

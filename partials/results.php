@@ -4,6 +4,15 @@
         <li class="flight" id="<?php echo $this->_getFlightId($flight); ?>">
             <div class="flight-header">
                 <span class="flight-price"><?php echo $this->_getPrice($flight); ?></span>
+                <?php if(isset($flight['frequentFlyer'])): ?>
+                    <span class="flight-freq-flyer">
+                        <strong><?php echo $flight['frequentFlyer']['program']; ?>:</strong> 
+                        <span class="flight-miles"><?php echo $flight['frequentFlyer']['awardMilesValue']; ?></span>
+                        <span class="flight-mile-type"><?php echo $flight['frequentFlyer']['awardMilesName']; ?></span>
+                    </span>
+                <?php else: ?>
+                    <span class="flight-no-miles">No earnings :(</span>
+                <?php endif; ?>
             </div>
             <div class="flight-body">
                 <?php foreach($flight['legs'] as $leg): ?>

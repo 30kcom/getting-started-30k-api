@@ -2,6 +2,7 @@
 
 require('../../lib/EasyRequest.php');
 require('FlightResults.php');
+require('Helper.php');
 
 class FlightSearch{
     

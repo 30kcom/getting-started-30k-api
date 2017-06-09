@@ -1,10 +1,34 @@
 <?php 
 
+require('MilefyApiClient.php');
+
 class FlightResults{
     
     public function __construct($response){
         
-        $this->_response = $response;
+        $this->_helper = new Helper();
+        $this->_response = $this->_appendFrequentFlyerInfo($response);
+        
+    }
+    
+    protected function _appendFrequentFlyerInfo($response){
+        
+        if(!is_array($response['flights']) || count($response['flights']) <= 0) return $response;
+        
+        $milefyApiClient = new MilefyApiClient($response['flights']);
+        $milefyFlights = $milefyApiClient->getFlights();
+        
+        if(!$milefyFlights) return $response;
+        
+        foreach($response['flights'] as &$flight){
+            
+            $milefyFlight = $this->_helper->find($milefyFlights, $flight['flightId'], 'flightId');
+            if(!$milefyFlight) continue;
+            $flight['frequentFlyer'] = $milefyFlight;
+            
+        }
+        
+        return $response;
         
     }
     
@@ -55,7 +79,7 @@ class FlightResults{
         
         foreach($airlines as $code){
             
-            $airline = $this->_find($this->_response['airlines'], $code, 'airlineCode');
+            $airline = $this->_helper->find($this->_response['airlines'], $code, 'airlineCode');
             if(is_array($airline) && isset($airline['airlineName'])) $names[] = $airline['airlineName'];
             
         }
@@ -127,18 +151,7 @@ class FlightResults{
         
     }
     
-    protected function _find($array, $value, $key = 'id'){
-        
-        foreach($array as $obj){
-            
-            if(is_array($obj) && $obj[$key] == $value) return $obj;
-            
-        }
-        
-        return null;
-        
-    }
-    
+    protected $_helper = null;
     protected $_response = null;
     
     const NONSTOP = 'Nonstop';

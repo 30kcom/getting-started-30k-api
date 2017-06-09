@@ -1,30 +1,25 @@
+# Getting started with 30K API
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+## Requirements:
+- PHP 5.0
+- Apache 2.0
 
+## Dependences:
+- jQuery
+- Foundation for Sites
+- 30K Milefy API
 
-Hi there! Welcome to Cloud9 IDE!
+## How to start?
 
-To get you started, we have created a small hello world application.
+Clone this repository locally or (simplier) open account on c9.io 
+and setup a workspace from this repository. 
 
-1) Open the hello-world.php file
+Then just write a few lines of code to fetch miles via Milefy API for list of displayed flights.
 
-2) Follow the run instructions in the file's comments
+See our tutorial on:
+http://30k.com
 
-3) If you want to look at the Apache logs, check out ~/lib/apache2/log
-
-And that's all there is to it! Just have fun. Go ahead and edit the code, 
-or add new files. It's all up to you! 
-
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for support, or to learn more about using Cloud9 IDE. 
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+## References
+- [API Documentation](http://www.30k.com/docs/milefy/2.8/),
+- [API Demo](http://demo.30k.com)
+- [30K Website](http://30k.com)

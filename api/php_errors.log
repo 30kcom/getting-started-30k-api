@@ -1,0 +1,37 @@
+[09-Jun-2017 09:28:41 UTC] PHP Fatal error:  Undefined class constant 'API_BASE_URL' in /home/ubuntu/workspace/api/MilefyApiClient.php on line 194
+[09-Jun-2017 09:28:41 UTC] PHP Stack trace:
+[09-Jun-2017 09:28:41 UTC] PHP   1. {main}() /home/ubuntu/workspace/api/search/single.php:0
+[09-Jun-2017 09:28:41 UTC] PHP   2. FlightSearch->getFlightResults() /home/ubuntu/workspace/api/search/single.php:6
+[09-Jun-2017 09:28:41 UTC] PHP   3. FlightSearch->_sendHttpRequest() /home/ubuntu/workspace/api/FlightSearch.php:30
+[09-Jun-2017 09:28:41 UTC] PHP   4. call_user_func:{/home/ubuntu/workspace/api/FlightSearch.php:190}() /home/ubuntu/workspace/api/FlightSearch.php:190
+[09-Jun-2017 09:28:41 UTC] PHP   5. FlightSearch->_getFlightResultsSuccess() /home/ubuntu/workspace/api/FlightSearch.php:190
+[09-Jun-2017 09:28:41 UTC] PHP   6. FlightResults->__construct() /home/ubuntu/workspace/api/FlightSearch.php:46
+[09-Jun-2017 09:28:41 UTC] PHP   7. FlightResults->_appendFrequentFlyerInfo() /home/ubuntu/workspace/api/FlightResults.php:10
+[09-Jun-2017 09:28:41 UTC] PHP   8. MilefyApiClient->getFlights() /home/ubuntu/workspace/api/FlightResults.php:19
+[09-Jun-2017 09:28:41 UTC] PHP   9. MilefyApiClient->_createHttpClient() /home/ubuntu/workspace/api/MilefyApiClient.php:21
+[09-Jun-2017 09:30:23 UTC] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'Auth must be one of: string with format "user:pass" or "null".' in /home/ubuntu/workspace/lib/EasyRequest.php:888
+Stack trace:
+#0 /home/ubuntu/workspace/api/MilefyApiClient.php(197): EasyRequest->withAuth(':')
+#1 /home/ubuntu/workspace/api/MilefyApiClient.php(21): MilefyApiClient->_createHttpClient('POST', '/api/miles/calc...')
+#2 /home/ubuntu/workspace/api/FlightResults.php(19): MilefyApiClient->getFlights()
+#3 /home/ubuntu/workspace/api/FlightResults.php(10): FlightResults->_appendFrequentFlyerInfo(Array)
+#4 /home/ubuntu/workspace/api/FlightSearch.php(46): FlightResults->__construct(Array)
+#5 [internal function]: FlightSearch->_getFlightResultsSuccess(Array)
+#6 /home/ubuntu/workspace/api/FlightSearch.php(190): call_user_func(Array, Array)
+#7 /home/ubuntu/workspace/api/FlightSearch.php(30): FlightSearch->_sendHttpRequest(Object(EasyRequest), Array, Array)
+#8 /home/ubuntu/workspace/api/search/single.php(6): FlightSearch->getFlightResults()
+#9 {main}
+ in /home/ubuntu/workspace/lib/EasyRequest.php on line 888
+[09-Jun-2017 09:38:42 UTC] PHP Fatal error:  Uncaught exception 'InvalidArgumentException' with message 'Auth must be one of: string with format "user:pass" or "null".' in /home/ubuntu/workspace/lib/EasyRequest.php:888
+Stack trace:
+#0 /home/ubuntu/workspace/api/MilefyApiClient.php(197): EasyRequest->withAuth(':')
+#1 /home/ubuntu/workspace/api/MilefyApiClient.php(21): MilefyApiClient->_createHttpClient('POST', '/api/miles/calc...')
+#2 /home/ubuntu/workspace/api/FlightResults.php(19): MilefyApiClient->getFlights()
+#3 /home/ubuntu/workspace/api/FlightResults.php(10): FlightResults->_appendFrequentFlyerInfo(Array)
+#4 /home/ubuntu/workspace/api/FlightSearch.php(46): FlightResults->__construct(Array)
+#5 [internal function]: FlightSearch->_getFlightResultsSuccess(Array)
+#6 /home/ubuntu/workspace/api/FlightSearch.php(190): call_user_func(Array, Array)
+#7 /home/ubuntu/workspace/api/FlightSearch.php(30): FlightSearch->_sendHttpRequest(Object(EasyRequest), Array, Array)
+#8 /home/ubuntu/workspace/api/search/single.php(6): FlightSearch->getFlightResults()
+#9 {main}
+ in /home/ubuntu/workspace/lib/EasyRequest.php on line 888

@@ -6,7 +6,12 @@ class MilefyApiClient{
         
         session_start();
         
+        $this->_apiBaseUrl = getenv('MILEFY_BASE_URL');
+        $this->_apiUsername = getenv('MILEFY_USERNAME');
+        $this->_apiPassword = getenv('MILEFY_PASSWORD');
+        
         $this->_flightResults = $flightResults;
+        
         $this->_helper = new Helper();
         
     }
@@ -186,10 +191,10 @@ class MilefyApiClient{
     
     protected function _createHttpClient($method, $endpoint){
         
-        $client = EasyRequest::create(self::API_BASE_URL . $endpoint);
+        $client = EasyRequest::create($this->_apiBaseUrl . $endpoint);
         
         $client
-            ->withAuth(self::API_USERNAME . ':' . self::API_PASSWORD)
+            ->withAuth($this->_apiUsername . ':' . $this->_apiPassword)
             ->withHeader(self::$_DEFAULT_HEADERS)
             ->withTimeout(self::REQUEST_TIMEOUT);
         
@@ -198,6 +203,7 @@ class MilefyApiClient{
     }
     
     protected $_flightResults = null;
+    
     protected $_helper = null;
     
     protected static $_DEFAULT_HEADERS = array(
@@ -207,14 +213,14 @@ class MilefyApiClient{
         'X-Api-Version' => 'v2.8'
     );
     
+    protected $_apiBaseUrl;
+    protected $_apiUsername;
+    protected $_apiPassword;
+    
     const AWARD_MILES_CODE = 1;
     
     const DEFAULT_FAILURE_MESSAGE = 'Unknown processing error.';
     
     const REQUEST_TIMEOUT = 120000;
-    
-    const API_BASE_URL = 'https://milefyapi-ext-dev.30k.com';
-    const API_USERNAME = 'showcasetool.dev';
-    const API_PASSWORD = 'b4a27326b4c2';
     
 }

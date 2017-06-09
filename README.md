@@ -21,5 +21,6 @@ http://30k.com
 
 ## References
 - [API Documentation](http://www.30k.com/docs/milefy/2.8/),
-- [API Demo](http://demo.30k.com)
+- [API Sandbox](http://sandbox.30k.com),
+- [API Demo](http://demo.30k.com),
 - [30K Website](http://30k.com)

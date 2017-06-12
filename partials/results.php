@@ -15,22 +15,6 @@
                 
                 <!-- FREQUENT FLYER INFO PLACEHOLDER -->
                 
-                <?php if(isset($flight['frequentFlyer'])): ?>
-                
-                    <span class="flight-freq-flyer">
-                        <strong><?php echo $flight['frequentFlyer']['program']; ?>:</strong> 
-                        <span class="flight-miles"><?php echo $flight['frequentFlyer']['awardMilesValue']; ?></span>
-                        <span class="flight-mile-type"><?php echo $flight['frequentFlyer']['awardMilesName']; ?></span>
-                    </span>
-                    
-                <?php else: ?>
-                    
-                    <span class="flight-no-miles">No earnings :(</span>
-                    
-                <?php endif; ?>
-                
-                <!-- FREQUENT FLYER INFO PLACEHOLDER -->
-                
             </div>
             
             <!-- /HEADER -->

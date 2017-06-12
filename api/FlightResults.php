@@ -1,8 +1,5 @@
 <?php 
 
-// Milefy API Client class to get frequesnt flyer information
-require('MilefyApiClient.php');
-
 /*
     
     Generates flight search results HTML from flight search data
@@ -24,8 +21,7 @@ class FlightResults{
         
         $this->_helper = new Helper();
         
-        // appends frequent flyer information to flight search results data
-        $this->_response = $this->_appendFrequentFlyerInfo($response);
+        $this->_response = $response;
         
     }
     
@@ -47,41 +43,6 @@ class FlightResults{
     }
     
     /* PROTECTED ==============================================================*/
-    
-    /*
-        Loads frequent flyer information from Milefy API
-        and appends it to flight search results info.
-    */
-    protected function _appendFrequentFlyerInfo($response){
-        
-        // validates flight search results
-        if(!is_array($response['flights']) || count($response['flights']) <= 0) return $response;
-        
-        // creates Milefy API client
-        $milefyApiClient = new MilefyApiClient($response['flights']);
-        
-        // fetches array of flights containing frequent flyer info 
-        $milefyFlights = $milefyApiClient->getFlights();
-        
-        if(!$milefyFlights) return $response;
-        
-        // for every flight append frequent flyer info if exists
-        foreach($response['flights'] as &$flight){
-            
-            // find flight with frequent flyer info
-            $milefyFlight = $this->_helper->find($milefyFlights, $flight['flightId'], 'flightId');
-            
-            // no frequent flyer info?
-            if(!$milefyFlight) continue;
-            
-            // append frequent flyer info to the flight
-            $flight['frequentFlyer'] = $milefyFlight;
-            
-        }
-        
-        return $response;
-        
-    }
     
     /*
         Formats flight total price

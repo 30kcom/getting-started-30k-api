@@ -69,7 +69,7 @@ class FlightResults{
         foreach($response['flights'] as &$flight){
             
             // find flight with frequent flyer info
-            $milefyFlight = $this->_helper->find($milefyFlights, $flight['flightId'], 'flightId');
+            $milefyFlight = $this->_helper->find($milefyFlights, $flight['flightId'], 'id');
             
             // no frequent flyer info?
             if(!$milefyFlight) continue;
